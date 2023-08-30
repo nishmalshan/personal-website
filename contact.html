@@ -14,6 +14,8 @@
 	<link rel="stylesheet" href="vendors/owl-carousel/owl.carousel.min.css">
 	<link rel="stylesheet" href="css/magnific-popup.css">
 	<link rel="stylesheet" href="vendors/nice-select/css/nice-select.css">
+    <!-- ajax library gform-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<!-- main css -->
 	<link rel="stylesheet" href="css/style.css">
 </head>
@@ -105,7 +107,7 @@
                     </div>
                 </div>
                 <div class="col-lg-9">
-                    <form class="row contact_form" action="contact_process.php" method="post" id="contactForm" novalidate="novalidate">
+                    <form class="row contact_form"  id="submit-form" >
                         <div class="col-md-6">
                             <div class="form-group">
                                 <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name">
@@ -114,7 +116,7 @@
                                 <input type="email" class="form-control" id="email" name="email" placeholder="Enter email address">
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" id="subject" name="subject" placeholder="Enter Subject">
+                                <input type="number" class="form-control" id="subject" name="number" placeholder="Enter mobile number">
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -130,14 +132,7 @@
                     </form>
                 </div>
             </div>
-            <div id="mapBox" class="mapBox" 
-                data-lat="40.701083" 
-                data-lon="-74.1522848" 
-                data-zoom="13" 
-                data-info="PO Box CT16122 Collins Street West, Victoria 8007, Australia."
-                data-mlat="40.701083"
-                data-mlon="-74.1522848">
-            </div>
+           
         </div>
     </section>
     <!--================Contact Area =================-->
@@ -174,6 +169,26 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script><br> A
         </div>
     </footer>
     <!--================End Footer Area =================-->
+
+    <script>
+        $("#submit-form").submit((e)=>{
+            e.preventDefault()
+            $.ajax({
+                url:"https://script.google.com/macros/s/AKfycbyLGzjON0A6GCFyNiJGVormMBMSKE06e62vipBgkJ-WHz-9o3WCJVcZ5QTpbDu_DAQAGA/exec",
+                data:$("#submit-form").serialize(),
+                method:"post",
+                success:function (response){
+                    alert("Form submitted successfully")
+                    window.location.reload()
+                    //window.location.href="https://google.com"
+                },
+                error:function (err){
+                    alert("Something Error")
+    
+                }
+            })
+        })
+    </script>
     
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
